@@ -10,6 +10,6 @@ export declare class PrismaHighlighter {
     private colorize;
     highlight(schema: string): string;
 }
-declare const _default: any;
-export default _default;
+declare const highlighter: PrismaHighlighter;
+export default highlighter;
 //# sourceMappingURL=highlighter.d.ts.map
