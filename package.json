@@ -1,0 +1,45 @@
+{
+  "name": "prismalux",
+  "version": "0.1.0",
+  "description": "Prisma Schema Highlighter",
+  "type": "module",
+  "main": "./output/cjs/index.cjs",
+  "module": "./output/esm/index.mjs",
+  "types": "./output/index.d.ts",
+  "exports": {
+    "import": "./output/esm/index.mjs",
+    "require": "./output/cjs/index.cjs",
+    "types": "./output/index.d.ts"
+  },
+  "scripts": {
+    "prepare:dirs": "node -e \"require('fs').mkdirSync('output/cjs', { recursive: true }); require('fs').mkdirSync('output/esm', { recursive: true });\"",
+    "build": "npm run prepare:dirs && npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc --project tsconfig.cjs.json",
+    "build:esm": "tsc --project tsconfig.esm.json",
+    "dev": "tsc -w",
+    "clean": "rm -rf output"
+  },
+  "author": {
+    "name": "Artyom Gorlovetskiy",
+    "email": "unbywyd@gmail.com",
+    "url": "https://github.com/unbywyd"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unbywyd/prismalux.git"
+  },
+  "bugs": {
+    "url": "https://github.com/unbywyd/prismalux/issues"
+  },
+  "homepage": "https://github.com/unbywyd/prismalux#readme",
+  "files": [
+    "output/cjs/",
+    "output/esm/",
+    "README.md",
+    "LICENSE.md"
+  ]
+}
