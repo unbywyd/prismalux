@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /**
  * Prismalux - Prisma Schema Highlighter
  * Developed by Artyom Gorlovetskiy (unbywyd)

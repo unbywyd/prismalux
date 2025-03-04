@@ -16,6 +16,7 @@
 ✔ **Syntax highlighting** for Prisma schema files  
 ✔ **Works as CLI & library** (use as `prismalux [path]` or import in code)  
 ✔ **Filter a specific model or enum** using `--filter=User`
+✔ **ESM & CommonJS** support
 
 ---
 
@@ -57,6 +58,7 @@ Use "," or "|" to separate multiple models/enums:
 ```sh
 prismalux --filter="User|Role"
 ```
+
 ```sh
 prismalux --filter=User,Role
 ```
@@ -130,7 +132,8 @@ prismalux --filter=User
 #### **📦 ESM (ES Modules)**
 
 ```typescript
-import PrismaHighlighter from "prismalux";
+import { PrismaHighlighter } from "prismalux";
+const highlighter = new PrismaHighlighter();
 
 const schema = `
 model User {
@@ -141,15 +144,16 @@ model User {
 }
 `;
 
-console.log(PrismaHighlighter.highlight(schema));
+console.log(highlighter.highlight(schema));
 ```
 
 #### **📦 CommonJS (CJS)**
 
-```javascript
-const { PrismaHighlighter, highlight } = require("prismalux");
+Similar to ESM
 
-console.log(highlight(schema));
+```javascript
+import { PrismaHighlighter } from "prismalux"; // or require("prismalux")
+const highlighter = new PrismaHighlighter();
 ```
 
 ---

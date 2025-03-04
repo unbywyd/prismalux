@@ -7,24 +7,20 @@
   "publishConfig": {
     "access": "public"
   },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "rm -rf output"
+  },
   "exports": {
     "import": "./output/esm/index.js",
-    "require": "./output/cjs/index.js"
+    "require": "./output/cjs/index.cjs"
   },
-  "main": "./output/index.js",
+  "main": "./output/cjs/index.cjs",
   "module": "./output/esm/index.js",
-  "types": "./output/index.d.ts",
+  "types": "./output/esm/index.d.ts",
   "bin": {
     "prismalux": "./output/bin.js"
-  },
-  "scripts": {
-    "prepare:dirs": "node -e \"require('fs').mkdirSync('output/cjs', { recursive: true }); require('fs').mkdirSync('output/esm', { recursive: true });\"",
-    "build": "npm run prepare:dirs && npm run build:cjs && npm run build:esm && npm run build:bin",
-    "build:cjs": "tsc --project tsconfig.cjs.json",
-    "build:esm": "tsc --project tsconfig.esm.json",
-    "build:bin": "tsc",
-    "dev": "tsc -w",
-    "clean": "rm -rf output"
   },
   "author": {
     "name": "Artyom Gorlovetskiy",
@@ -56,8 +52,9 @@
     "terminal"
   ],
   "devDependencies": {
-    "typescript": "^5.7.2",
-    "@types/node": "^22.10.10"
+    "@types/node": "^22.10.10",
+    "tsup": "^8.4.0",
+    "typescript": "^5.7.2"
   },
   "files": [
     "output/",
