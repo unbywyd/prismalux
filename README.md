@@ -1,6 +1,3 @@
-### 📜 **README.md**
-
-````md
 # Prismalux 🌓 - Prisma Schema Syntax Highlighter
 
 [![npm version](https://img.shields.io/npm/v/prismalux.svg?style=flat-square)](https://www.npmjs.com/package/prismalux)
@@ -134,4 +131,3 @@ console.log(plainHighlighter.highlight(schema));
 ## 📜 License
 
 **MIT License** © [Artyom Gorlovetskiy](https://github.com/unbywyd)
-````
