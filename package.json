@@ -1,6 +1,6 @@
 {
   "name": "prismalux",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "✨ A lightweight Prisma Schema Highlighter for CLI & Node.js. Works with CommonJS and ES Modules.",
   "type": "module",
   "private": false,
@@ -55,8 +55,7 @@
     "typescript": "^5.7.2"
   },
   "files": [
-    "output/cjs/",
-    "output/esm/",
+    "output/",
     "README.md",
     "LICENSE.md"
   ]
