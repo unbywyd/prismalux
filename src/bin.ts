@@ -122,7 +122,6 @@ const filterSchemaPart = (schema: string, filterInput: string): string | null =>
     return results.length > 0 ? results.join("\n\n") : null;
 };
 
-
 // Loading and rendering Prisma Schema
 (async () => {
     try {
