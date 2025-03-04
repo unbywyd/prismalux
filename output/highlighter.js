@@ -54,7 +54,7 @@ export class PrismaHighlighter {
                         return `${coloredKey}: ${coloredValue}`;
                     }
                     return this.colorize(arg, "cyan");
-                }).join(",");
+                }).join(", ");
                 return this.colorize(annotation, "yellow") + this.colorize(openBracket, "yellowBold") + content + this.colorize(closeBracket, "yellowBold");
             });
             // Highlight annotations with function calls (@default(now()))
@@ -68,18 +68,25 @@ export class PrismaHighlighter {
             // Highlight multiline comments `/* comment */`
             line = line.replace(/\/\*([\s\S]*?)\*\//g, (_, content) => this.colorize(`/*${content}*/`, "green"));
             // Highlight types (standard and custom)
-            line = line.replace(/(?<!["'])(?<=\s|^)([A-Z][a-zA-Z0-9_]*)(\?)?(\[\])?(?![^()]*\))/g, (match, type, optional) => {
-                const isOptional = optional !== undefined;
-                if (PrismaHighlighter.PRISMA_TYPES.has(type)) {
-                    return isOptional
-                        ? this.colorize(match, "darkBlue")
-                        : this.colorize(match, "lightBlue");
+            line = line.replace(/^(\s*\S+)(.*)$/, (match, firstPart, secondPart) => {
+                // If the second part is empty, just return the string unchanged
+                if (!secondPart.trim() && !["{", "}"].includes(firstPart.trim())) {
+                    return this.colorize(match, "cyan");
                 }
-                else {
-                    return isOptional
-                        ? this.colorize(match, "lightPurple")
-                        : this.colorize(match, "purple");
-                }
+                return firstPart + (secondPart || "").replace(/(?<!["'])(?<=\s|^)([A-Z][a-zA-Z0-9_]*)(\?)?(\[\])?(?![^()]*\))/g, (match, type, optional) => {
+                    console.log("type: " + type);
+                    const isOptional = optional !== undefined;
+                    if (PrismaHighlighter.PRISMA_TYPES.has(type)) {
+                        return isOptional
+                            ? this.colorize(match, "gray")
+                            : this.colorize(match, "lightBlue");
+                    }
+                    else {
+                        return isOptional
+                            ? this.colorize(match, "lightPurple")
+                            : this.colorize(match, "purple");
+                    }
+                });
             });
             return line;
         })
@@ -87,5 +94,5 @@ export class PrismaHighlighter {
     }
 }
 const highlighter = new PrismaHighlighter();
-export default highlighter.highlight.bind(highlighter);
+export default highlighter;
 //# sourceMappingURL=highlighter.js.map
