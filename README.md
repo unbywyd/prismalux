@@ -34,7 +34,6 @@ If you just want to run **Prismalux** without installing it, simply use:
 ```sh
 npx prismalux
 ```
-````
 
 This will **automatically find** the Prisma schema in the current directory (e.g., `prisma/schema.prisma`).  
 If your schema is located elsewhere, specify the path manually:
