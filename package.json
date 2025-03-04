@@ -11,6 +11,9 @@
     "require": "./output/cjs/index.cjs",
     "types": "./output/index.d.ts"
   },
+  "bin": {
+    "prismalux": "./output/index.js"
+  },
   "scripts": {
     "prepare:dirs": "node -e \"require('fs').mkdirSync('output/cjs', { recursive: true }); require('fs').mkdirSync('output/esm', { recursive: true });\"",
     "build": "npm run prepare:dirs && npm run build:cjs && npm run build:esm",
