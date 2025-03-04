@@ -1,6 +1,6 @@
 {
   "name": "prismalux",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "✨ A lightweight Prisma Schema Highlighter for CLI & Node.js. Works with CommonJS and ES Modules.",
   "type": "module",
   "private": false,
@@ -11,17 +11,18 @@
     "import": "./output/esm/index.js",
     "require": "./output/cjs/index.js"
   },
-  "main": "./output/cjs/index.js",
+  "main": "./output/index.js",
   "module": "./output/esm/index.js",
   "types": "./output/index.d.ts",
   "bin": {
-    "prismalux": "./output/index.js"
+    "prismalux": "./output/bin.js"
   },
   "scripts": {
     "prepare:dirs": "node -e \"require('fs').mkdirSync('output/cjs', { recursive: true }); require('fs').mkdirSync('output/esm', { recursive: true });\"",
-    "build": "npm run prepare:dirs && npm run build:cjs && npm run build:esm",
+    "build": "npm run prepare:dirs && npm run build:cjs && npm run build:esm && npm run build:bin",
     "build:cjs": "tsc --project tsconfig.cjs.json",
     "build:esm": "tsc --project tsconfig.esm.json",
+    "build:bin": "tsc",
     "dev": "tsc -w",
     "clean": "rm -rf output"
   },
@@ -41,6 +42,9 @@
   "homepage": "https://github.com/unbywyd/prismalux#readme",
   "keywords": [
     "prisma",
+    "prisma-highlight",
+    "prisma-schema",
+    "prisma-schema-highlighter",
     "prisma-highlighter",
     "syntax-highlighting",
     "prisma-cli",
@@ -52,7 +56,8 @@
     "terminal"
   ],
   "devDependencies": {
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "@types/node": "^22.10.10"
   },
   "files": [
     "output/",
