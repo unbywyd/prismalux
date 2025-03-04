@@ -5,8 +5,12 @@
 
 ✨ **Prismalux** is a **lightweight, zero-dependency** **CLI tool & library** for highlighting **Prisma schema** files in the terminal.
 
-💡 **Prismalux is minimalistic, fast, and does not require any dependencies**—pure **TypeScript + Node.js**.  
 🔍 You can also highlight a specific **model** or **enum** using the `--filter=` option.
+
+## Just run it with npx:
+```sh
+npx prismalux
+```
 
 ---
 
