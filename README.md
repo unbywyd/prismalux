@@ -19,7 +19,7 @@ It supports **CommonJS (CJS)** and **ES Modules (ESM)**, making it easy to integ
 
 ## 📸 Preview
 
-![Prismalux Syntax Highlighting](https://raw.githubusercontent.com/unbywyd/prismalux/main/assets/preview.png)
+![Prismalux Syntax Highlighting](https://raw.githubusercontent.com/unbywyd/prismalux/master/assets/preview.png)
 
 ---
 
