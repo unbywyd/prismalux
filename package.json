@@ -1,11 +1,15 @@
 {
   "name": "prismalux",
   "version": "0.1.0",
-  "description": "Prisma Schema Highlighter",
+  "description": "✨ A lightweight Prisma Schema Highlighter for CLI & Node.js. Works with CommonJS and ES Modules.",
   "type": "module",
   "main": "./output/cjs/index.cjs",
   "module": "./output/esm/index.mjs",
   "types": "./output/index.d.ts",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     "import": "./output/esm/index.mjs",
     "require": "./output/cjs/index.cjs",
@@ -28,9 +32,6 @@
     "url": "https://github.com/unbywyd"
   },
   "license": "MIT",
-  "devDependencies": {
-    "typescript": "^5.7.2"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/unbywyd/prismalux.git"
@@ -39,6 +40,21 @@
     "url": "https://github.com/unbywyd/prismalux/issues"
   },
   "homepage": "https://github.com/unbywyd/prismalux#readme",
+  "keywords": [
+    "prisma",
+    "prisma-highlighter",
+    "syntax-highlighting",
+    "prisma-cli",
+    "prisma-tools",
+    "developer-tools",
+    "cli",
+    "typescript",
+    "nodejs",
+    "terminal"
+  ],
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  },
   "files": [
     "output/cjs/",
     "output/esm/",

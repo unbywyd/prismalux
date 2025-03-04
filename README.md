@@ -1,19 +1,23 @@
-# Prismalux 🌓 - Prisma Schema Syntax Highlighter
+# Prismalux 🌓 - A **Zero-Dependency** Prisma Schema Highlighter
 
 [![npm version](https://img.shields.io/npm/v/prismalux.svg?style=flat-square)](https://www.npmjs.com/package/prismalux)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-✨ **Prismalux** is a lightweight **CLI tool & library** for highlighting **Prisma schema** in the terminal.  
+✨ **Prismalux** is a **lightweight, zero-dependency** **CLI tool & library** for highlighting **Prisma schema** files in the terminal.  
 It supports **CommonJS (CJS)** and **ES Modules (ESM)**, making it easy to integrate into **CLI applications** or use in **Node.js projects**.
+
+💡 **Prismalux is minimalistic, fast, and does not require any dependencies**—pure **TypeScript + Node.js**.  
+🔍 You can also highlight a specific **model** or **enum** using the `--filter=` option.
 
 ---
 
 ## 🚀 Features
 
+✔ **Zero dependencies** - No extra packages required  
 ✔ **Syntax highlighting** for Prisma schema files  
 ✔ **Works as CLI & library** (use as `prismalux [path]` or import in code)  
 ✔ **Supports both ESM & CommonJS** (`import` and `require`)  
-✔ **No dependencies** - pure **TypeScript + Node.js**
+✔ **Filter a specific model or enum** using `--filter=User`
 
 ---
 
@@ -23,22 +27,52 @@ It supports **CommonJS (CJS)** and **ES Modules (ESM)**, making it easy to integ
 
 ---
 
-### **📦 Get Started**
+## **📦 Get Started**
 
 If you just want to run **Prismalux** without installing it, simply use:
 
 ```sh
 npx prismalux
 ```
+````
 
 This will **automatically find** the Prisma schema in the current directory (e.g., `prisma/schema.prisma`).  
 If your schema is located elsewhere, specify the path manually:
 
 ```sh
-npx prismalux ./path/to/schema.prisma
+npx prismalux --path=./path/to/schema.prisma
 ```
 
 ---
+
+### **🔍 Highlight a Specific Model or Enum**
+
+If you only want to highlight **a specific model or enum**, use the `--filter=` option:
+
+```sh
+prismalux --filter=User
+```
+
+This will **only** display:
+
+```prisma
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  role      Role
+  createdAt DateTime @default(now())
+}
+```
+
+You can also **combine it with a custom schema path**:
+
+```sh
+prismalux --path=./custom/schema.prisma --filter=Post
+```
+
+---
+
+## **📦 Installation**
 
 ### **Global Installation (CLI)**
 
@@ -51,12 +85,18 @@ npm install -g prismalux
 Now you can run:
 
 ```sh
-prismalux [path_to_schema]
+prismalux
+```
+
+Or specify a custom path:
+
+```sh
+prismalux --path=./path/to/schema.prisma
 ```
 
 ---
 
-## 🎮 Usage
+## 🎮 **Usage**
 
 ### **1️⃣ CLI Mode**
 
@@ -71,7 +111,10 @@ prismalux --version
 prismalux
 
 # Highlight a specific file
-prismalux ./custom/schema.prisma
+prismalux --path=./custom/schema.prisma
+
+# Highlight a specific model or enum
+prismalux --filter=User
 ```
 
 ### **2️⃣ Import in Code**
@@ -103,7 +146,7 @@ console.log(highlight(schema));
 
 ---
 
-## 🔧 Configuration
+## 🔧 **Configuration**
 
 Prismalux allows you to customize colors and disable highlighting if needed.
 
@@ -128,6 +171,6 @@ console.log(plainHighlighter.highlight(schema));
 
 ---
 
-## 📜 License
+## 📜 **License**
 
 **MIT License** © [Artyom Gorlovetskiy](https://github.com/unbywyd)

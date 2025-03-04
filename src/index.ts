@@ -138,7 +138,7 @@ const filterSchemaPart = (schema: string, filterName: string): string | null => 
 
 // Exporting for ESM and CommonJS
 const highlighterInstance = new PrismaHighlighter();
-export default highlighterInstance.highlight.bind(highlighterInstance);
+export default highlighterInstance;
 export { PrismaHighlighter };
 
 // CommonJS export

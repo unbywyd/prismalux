@@ -11,7 +11,7 @@ export declare const loadPrismaSchema: (inputPath?: string) => Promise<{
     schema: string;
     path: string;
 }>;
-declare const _default: any;
-export default _default;
+declare const highlighterInstance: PrismaHighlighter;
+export default highlighterInstance;
 export { PrismaHighlighter };
 //# sourceMappingURL=index.d.ts.map
