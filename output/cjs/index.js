@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+"use strict";
 /**
  * Prismalux - Prisma Schema Highlighter
  * Developed by Artyom Gorlovetskiy (unbywyd)
@@ -6,26 +7,65 @@
  *
  * This tool helps you to highlight and filter Prisma schema files directly from the command line.
  */
-import fs from "fs";
-import path from "path";
-import highlighter, { PrismaHighlighter } from "./highlighter.js";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PrismaHighlighter = exports.loadPrismaSchema = void 0;
+const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
+const highlighter_js_1 = __importStar(require("./highlighter.js"));
+Object.defineProperty(exports, "PrismaHighlighter", { enumerable: true, get: function () { return highlighter_js_1.PrismaHighlighter; } });
 // Function to load Prisma Schema
-export const loadPrismaSchema = async (inputPath) => {
+const loadPrismaSchema = async (inputPath) => {
     const cwd = process.cwd();
     let schemaPath = null;
     // Check if a path is provided
     if (inputPath) {
         // Determine if the path is absolute or relative
-        const resolvedPath = path.isAbsolute(inputPath) ? inputPath : path.resolve(cwd, inputPath);
-        if (fs.existsSync(resolvedPath)) {
-            const stat = fs.statSync(resolvedPath);
+        const resolvedPath = path_1.default.isAbsolute(inputPath) ? inputPath : path_1.default.resolve(cwd, inputPath);
+        if (fs_1.default.existsSync(resolvedPath)) {
+            const stat = fs_1.default.statSync(resolvedPath);
             if (stat.isDirectory()) {
                 // If it's a directory, look for `schema.prisma`
                 const possibleSchemaPaths = [
-                    path.join(resolvedPath, "prisma", "schema.prisma"),
-                    path.join(resolvedPath, "schema.prisma")
+                    path_1.default.join(resolvedPath, "prisma", "schema.prisma"),
+                    path_1.default.join(resolvedPath, "schema.prisma")
                 ];
-                schemaPath = possibleSchemaPaths.find(fs.existsSync) || null;
+                schemaPath = possibleSchemaPaths.find(fs_1.default.existsSync) || null;
             }
             else if (stat.isFile()) {
                 // If it's a file, use it directly
@@ -39,23 +79,24 @@ export const loadPrismaSchema = async (inputPath) => {
     else {
         // If no path is provided, look in standard locations
         const possibleSchemaPaths = [
-            path.join(cwd, "prisma", "schema.prisma"),
-            path.join(cwd, "schema.prisma")
+            path_1.default.join(cwd, "prisma", "schema.prisma"),
+            path_1.default.join(cwd, "schema.prisma")
         ];
-        schemaPath = possibleSchemaPaths.find(fs.existsSync) || null;
+        schemaPath = possibleSchemaPaths.find(fs_1.default.existsSync) || null;
     }
     // If no file is found, throw an error
     if (!schemaPath) {
         throw new Error(`❌ Prisma schema file not found. Try: prismalux --path=[path_to_schema]`);
     }
     // Read the file
-    const schemaContent = await fs.promises.readFile(schemaPath, "utf-8");
+    const schemaContent = await fs_1.default.promises.readFile(schemaPath, "utf-8");
     // Check if it's really a Prisma schema (look for keywords)
     if (!/^\s*(generator|datasource|client)\b/m.test(schemaContent)) {
         throw new Error(`❌ The file at "${schemaPath}" does not appear to be a valid Prisma schema.`);
     }
     return { schema: schemaContent, path: schemaPath };
 };
+exports.loadPrismaSchema = loadPrismaSchema;
 // Function to parse CLI arguments
 const parseArgs = (args) => {
     const options = {};
@@ -109,7 +150,7 @@ const filterSchemaPart = (schema, filterInput) => {
 (async () => {
     try {
         const filePath = typeof options.path === "string" ? options.path : undefined;
-        const { schema, path } = await loadPrismaSchema(filePath);
+        const { schema, path } = await (0, exports.loadPrismaSchema)(filePath);
         console.log(`\n✨ Highlighting Prisma schema: ${path}\n`);
         let schemaToHighlight = schema;
         const filter = options?.filter || options?.f;
@@ -121,7 +162,7 @@ const filterSchemaPart = (schema, filterInput) => {
             }
             schemaToHighlight = filteredSchema;
         }
-        console.log(highlighter.highlight(schemaToHighlight));
+        console.log(highlighter_js_1.default.highlight(schemaToHighlight));
     }
     catch (error) {
         console.error(error instanceof Error ? error.message : "❌ An unknown error occurred.");
@@ -129,15 +170,14 @@ const filterSchemaPart = (schema, filterInput) => {
     }
 })();
 // Exporting for ESM and CommonJS
-const highlighterInstance = new PrismaHighlighter();
-export default highlighterInstance;
-export { PrismaHighlighter };
+const highlighterInstance = new highlighter_js_1.PrismaHighlighter();
+exports.default = highlighterInstance;
 // CommonJS export
 if (typeof module !== "undefined") {
     module.exports = {
-        PrismaHighlighter,
+        PrismaHighlighter: highlighter_js_1.PrismaHighlighter,
         highlight: highlighterInstance.highlight.bind(highlighterInstance),
-        loadPrismaSchema
+        loadPrismaSchema: exports.loadPrismaSchema
     };
 }
 //# sourceMappingURL=index.js.map

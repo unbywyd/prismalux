@@ -4,6 +4,12 @@
         "module": "CommonJS",
         "moduleResolution": "Node",
         "outDir": "output/cjs",
-        "declaration": true
-    }
+        "declaration": true,
+        "allowJs": true,
+        "checkJs": false,
+        "sourceMap": true
+    },
+    "include": [
+        "src/**/*"
+    ]
 }

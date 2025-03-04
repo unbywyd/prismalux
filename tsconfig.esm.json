@@ -4,6 +4,12 @@
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
         "outDir": "output/esm",
-        "declaration": true
-    }
+        "declaration": true,
+        "allowJs": true,
+        "checkJs": false,
+        "sourceMap": true
+    },
+    "include": [
+        "src/**/*"
+    ]
 }

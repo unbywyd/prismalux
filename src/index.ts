@@ -104,11 +104,25 @@ if (options.version || options.v) {
 }
 
 // Filtering model/enum
-const filterSchemaPart = (schema: string, filterName: string): string | null => {
-    const regex = new RegExp(`\\b(model|enum)\\s+${filterName}\\s*{[\\s\\S]*?}`, "g");
-    const match = schema.match(regex);
-    return match ? match.join("\n") : null;
+const filterSchemaPart = (schema: string, filterInput: string): string | null => {
+    const filterNames = filterInput.split(/[,| ]+/).map(name => name.trim()).filter(name => name.length > 0);
+
+    if (filterNames.length === 0) {
+        console.error("❌ No valid model or enum names provided.");
+        return null;
+    }
+    let results: string[] = [];
+
+    for (const filterName of filterNames) {
+        const regex = new RegExp(`\\b(model|enum)\\s+${filterName}\\s*{[\\s\\S]*?}`, "g");
+        const match = schema.match(regex);
+        if (match) {
+            results.push(...match);
+        }
+    }
+    return results.length > 0 ? results.join("\n\n") : null;
 };
+
 
 // Loading and rendering Prisma Schema
 (async () => {

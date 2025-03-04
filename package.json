@@ -3,18 +3,17 @@
   "version": "0.1.0",
   "description": "✨ A lightweight Prisma Schema Highlighter for CLI & Node.js. Works with CommonJS and ES Modules.",
   "type": "module",
-  "main": "./output/cjs/index.cjs",
-  "module": "./output/esm/index.mjs",
-  "types": "./output/index.d.ts",
   "private": false,
   "publishConfig": {
     "access": "public"
   },
   "exports": {
-    "import": "./output/esm/index.mjs",
-    "require": "./output/cjs/index.cjs",
-    "types": "./output/index.d.ts"
+    "import": "./output/esm/index.js",
+    "require": "./output/cjs/index.js"
   },
+  "main": "./output/cjs/index.js",
+  "module": "./output/esm/index.js",
+  "types": "./output/index.d.ts",
   "bin": {
     "prismalux": "./output/index.js"
   },

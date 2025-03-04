@@ -3,8 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/prismalux.svg?style=flat-square)](https://www.npmjs.com/package/prismalux)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-✨ **Prismalux** is a **lightweight, zero-dependency** **CLI tool & library** for highlighting **Prisma schema** files in the terminal.  
-It supports **CommonJS (CJS)** and **ES Modules (ESM)**, making it easy to integrate into **CLI applications** or use in **Node.js projects**.
+✨ **Prismalux** is a **lightweight, zero-dependency** **CLI tool & library** for highlighting **Prisma schema** files in the terminal.
 
 💡 **Prismalux is minimalistic, fast, and does not require any dependencies**—pure **TypeScript + Node.js**.  
 🔍 You can also highlight a specific **model** or **enum** using the `--filter=` option.
@@ -16,7 +15,6 @@ It supports **CommonJS (CJS)** and **ES Modules (ESM)**, making it easy to integ
 ✔ **Zero dependencies** - No extra packages required  
 ✔ **Syntax highlighting** for Prisma schema files  
 ✔ **Works as CLI & library** (use as `prismalux [path]` or import in code)  
-✔ **Supports both ESM & CommonJS** (`import` and `require`)  
 ✔ **Filter a specific model or enum** using `--filter=User`
 
 ---
@@ -50,6 +48,17 @@ If you only want to highlight **a specific model or enum**, use the `--filter=` 
 
 ```sh
 prismalux --filter=User
+```
+
+Or **multiple models/enums**:
+
+Use "," or "|" to separate multiple models/enums:
+
+```sh
+prismalux --filter="User|Role"
+```
+```sh
+prismalux --filter=User,Role
 ```
 
 This will **only** display:
