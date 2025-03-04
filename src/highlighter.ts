@@ -98,7 +98,6 @@ export class PrismaHighlighter {
                     return firstPart + (secondPart || "").replace(
                         /(?<!["'])(?<=\s|^)([A-Z][a-zA-Z0-9_]*)(\?)?(\[\])?(?![^()]*\))/g,
                         (match, type, optional) => {
-                            console.log("type: " + type);
                             const isOptional = optional !== undefined;
                             if (PrismaHighlighter.PRISMA_TYPES.has(type)) {
                                 return isOptional
